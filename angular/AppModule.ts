@@ -9,6 +9,8 @@ import {HeroesComponent} from './HeroesComponent'
 import {HeroDetailComponent} from './HeroDetailComponent'
 import {HeroService} from './HeroService'
 import {DashboardComponent} from './DashboardComponent'
+import {HeroSearchService} from './HeroSearchService'
+import {HeroSearchComponent} from './HeroSearchComponent'
 
 @NgModule({
   imports: [
@@ -21,9 +23,10 @@ import {DashboardComponent} from './DashboardComponent'
     AppComponent,
     DashboardComponent,
     HeroesComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    HeroSearchComponent
   ],
-  providers: [HeroService],
+  providers: [HeroService, HeroSearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

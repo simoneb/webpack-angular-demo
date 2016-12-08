@@ -21,6 +21,13 @@ app.use(bodyParser.json())
 
 app.route('/api/heroes/:id?')
     .get((req, res) => {
+      const {name} = req.query
+
+      if(name) {
+        const regex = new RegExp(name, 'i')
+        return res.json(HEROES.filter(hero => regex.test(hero.name)))
+      }
+
       res.json(HEROES)
     })
     .put((req, res) => {
@@ -31,7 +38,7 @@ app.route('/api/heroes/:id?')
     })
     .post((req, res) => {
       const {name} = req.body
-      const hero = { id: HEROES[HEROES.length-1].id + 1, name}
+      const hero = {id: HEROES[HEROES.length - 1].id + 1, name}
       HEROES.push(hero)
       res.json(hero)
     })
