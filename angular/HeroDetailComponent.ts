@@ -9,7 +9,6 @@ import {Hero} from './Hero'
   template: require('./hero-detail.component.html')
 })
 export class HeroDetailComponent implements OnInit {
-  @Input()
   hero: Hero
 
   constructor(private route: ActivatedRoute,
@@ -25,5 +24,9 @@ export class HeroDetailComponent implements OnInit {
 
   goBack() {
     this.location.back()
+  }
+
+  save() {
+    this.heroService.update(this.hero).then(() => this.goBack())
   }
 }

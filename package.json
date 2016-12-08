@@ -26,6 +26,7 @@
     "babel-loader": "^6.2.8",
     "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
+    "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
     "css-loader": "^0.26.1",
     "css-to-string-loader": "^0.1.2",

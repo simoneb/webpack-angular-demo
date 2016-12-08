@@ -14,6 +14,10 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[]
 
   ngOnInit() {
+    this.getHeroes()
+  }
+
+  getHeroes() {
     this.heroService
         .getHeroes()
         .then(heroes => this.heroes = heroes)
@@ -29,5 +33,13 @@ export class HeroesComponent implements OnInit {
 
   gotoDetail() {
     this.router.navigate(['/detail', this.selectedHero.id])
+  }
+
+  add(name: string) {
+    this.heroService.create(name).then(hero => this.getHeroes())
+  }
+
+  delete(hero: Hero) {
+    this.heroService.delete(hero.id).then(hero => this.getHeroes())
   }
 }
