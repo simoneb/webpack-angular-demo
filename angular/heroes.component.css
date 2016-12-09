@@ -51,3 +51,12 @@
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
 }
+.heroes li button{
+    color: red;
+    cursor: pointer;
+    margin-left: 30%;
+}
+.heroes li button:hover{
+    background-color: lightslategrey;
+    cursor: pointer;
+}

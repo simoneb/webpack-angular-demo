@@ -26,7 +26,8 @@ module.exports = {
       {test: /\.css$/, loaders: ['css-to-string', 'css']},
     ],
     preLoaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: 'eslint'}
+      {test: /\.js$/, exclude: /node_modules/, loader: 'eslint'},
+      {test: /\.ts$/, exclude: /node_modules/, loader: 'tslint'}
     ]
   },
   devServer: {
