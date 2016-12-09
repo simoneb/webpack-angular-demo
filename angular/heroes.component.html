@@ -6,7 +6,7 @@
 <ul class="heroes">
     <li
             [class.selected]="hero === selectedHero"
-            *ngFor="let hero of heroes"
+            *ngFor="let hero of heroes | async"
             (click)="onSelected(hero)">
         <span class="badge">{{hero.id}}</span> {{hero.name}}
         <button [hidden]="hero !== selectedHero" (click)="deleteHero(hero.id)">X</button>
@@ -14,7 +14,7 @@
 </ul>
 <div *ngIf="selectedHero">
     <h2>
-        {{selectedHero.name | uppercase}} is my hero
+        {{selectedHero.name | myUppercase}} is my hero
     </h2>
     <button (click)="gotoDetail()">View Details</button>
 </div>

@@ -9,6 +9,7 @@ import {HeroesComponent} from './HeroesComponent'
 import {HeroDetailComponent} from './HeroDetailComponent'
 import {HeroService} from './HeroService'
 import {DashboardComponent} from './DashboardComponent'
+import {MyUppercasePipe} from './MyUppercasePipe'
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {DashboardComponent} from './DashboardComponent'
     AppComponent,
     DashboardComponent,
     HeroesComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    MyUppercasePipe
   ],
   providers: [HeroService],
   bootstrap: [AppComponent]

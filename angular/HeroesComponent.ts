@@ -3,6 +3,7 @@ import {Router} from '@angular/router'
 
 import {Hero} from './Hero'
 import {HeroService} from './HeroService'
+import {Observable} from 'rxjs'
 
 @Component({
   selector: 'my-heroes',
@@ -11,31 +12,32 @@ import {HeroService} from './HeroService'
 })
 export class HeroesComponent implements OnInit {
   selectedHero: Hero
-  heroes: Hero[]
-  updateList= function(){
- this.heroService
-        .getHeroes()
-        .then(heroes => this.heroes = heroes)
+  heroes: Observable<Hero[]>
+
+  getHeroes() {
+    this.heroes = this.heroService.getHeroes()
   }
 
-
   ngOnInit() {
-   this.updateList()
+    this.getHeroes()
   }
 
   constructor(private heroService: HeroService,
               private router: Router) {
   }
 
- deleteHero(id:number){
-   var res = window.confirm("Sicuro di eliminare?")
-   if(res){
-   this.heroService.delete(id).then(
-    res => {this.updateList(),
-    this.selectedHero = null}
-   )};
-   
- }
+  deleteHero(id: number) {
+    var res = window.confirm("Sicuro di eliminare?")
+    if (res) {
+      this.heroService.delete(id).then(
+          res => {
+            this.getHeroes(),
+                this.selectedHero = null
+          }
+      )
+    }
+  }
+
   onSelected(hero: Hero) {
     this.selectedHero = hero
   }
@@ -46,6 +48,6 @@ export class HeroesComponent implements OnInit {
 
   addHero(heroName) {
     this.heroService.saveHero(heroName)
-        .then(newHero => this.heroes.push(newHero))
+        .then(newHero => this.getHeroes())
   }
 }

@@ -3,17 +3,16 @@ import {Http} from '@angular/http'
 import {Hero} from './Hero'
 
 import 'rxjs/add/operator/toPromise'
+import {Observable} from 'rxjs'
 
 @Injectable()
 export class HeroService {
   constructor(private http: Http) {
   }
 
-  getHeroes(): Promise<Hero[]> {
+  getHeroes(): Observable<Hero[]> {
     return this.http.get('/api/heroes')
-        .toPromise()
-        .then(res => res.json())
-
+        .map(res => res.json() as Hero[])
   }
 
   delete(id:number){
@@ -25,6 +24,7 @@ export class HeroService {
 
   getById(id: number): Promise<Hero> {
     return this.getHeroes()
+        .toPromise()
         .then(heroes => heroes.find(hero => hero.id === id))
   }
 
