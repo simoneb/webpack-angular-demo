@@ -44,7 +44,10 @@ app.route('/api/heroes/:id?')
     })
     .delete((req, res) => {
       const {id} = req.params
-      const hero = HEROES.find(hero => hero.id === +id)
+
+      const hero = HEROES
+          .find(({id: idToDelete}) => idToDelete === +id)
+
       HEROES.splice(HEROES.indexOf(hero), 1)
       res.end()
     })
