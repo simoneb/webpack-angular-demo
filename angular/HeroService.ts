@@ -16,6 +16,13 @@ export class HeroService {
 
   }
 
+  delete(id:number){
+    return this.http.delete(`/api/heroes/${id}`)
+        .toPromise()
+        .then(res => res)
+
+  }
+
   getById(id: number): Promise<Hero> {
     return this.getHeroes()
         .then(heroes => heroes.find(hero => hero.id === id))

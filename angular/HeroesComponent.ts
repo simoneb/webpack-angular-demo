@@ -12,17 +12,30 @@ import {HeroService} from './HeroService'
 export class HeroesComponent implements OnInit {
   selectedHero: Hero
   heroes: Hero[]
-
-  ngOnInit() {
-    this.heroService
+  updateList= function(){
+ this.heroService
         .getHeroes()
         .then(heroes => this.heroes = heroes)
+  }
+
+
+  ngOnInit() {
+   this.updateList()
   }
 
   constructor(private heroService: HeroService,
               private router: Router) {
   }
 
+ deleteHero(id:number){
+   var res = window.confirm("Sicuro di eliminare?")
+   if(res){
+   this.heroService.delete(id).then(
+    res => {this.updateList(),
+    this.selectedHero = null}
+   )};
+   
+ }
   onSelected(hero: Hero) {
     this.selectedHero = hero
   }
