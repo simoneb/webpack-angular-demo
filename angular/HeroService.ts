@@ -20,4 +20,10 @@ export class HeroService {
     return this.getHeroes()
         .then(heroes => heroes.find(hero => hero.id === id))
   }
+
+  saveHero(heroName: string) {
+    return this.http.post('/api/heroes', {name: heroName})
+        .toPromise()
+        .then(res => res.json())
+  }
 }
