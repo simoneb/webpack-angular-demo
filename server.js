@@ -1,5 +1,6 @@
 const http = require('http')
 const express = require('express')
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -16,8 +17,36 @@ const HEROES = [
   {id: 20, name: 'Tornado'}
 ]
 
-app.get('/api/heroes', (req, res) => {
-  res.json(HEROES)
-})
+app.use(bodyParser.json())
+
+app.route('/api/heroes/:id?')
+    .get((req, res) => {
+      const {name} = req.query
+
+      if(name) {
+        const regex = new RegExp(name, 'i')
+        return res.json(HEROES.filter(hero => regex.test(hero.name)))
+      }
+
+      res.json(HEROES)
+    })
+    .put((req, res) => {
+      const {id, name} = req.body
+      const hero = HEROES.find(hero => hero.id === id)
+      hero.name = name
+      res.end()
+    })
+    .post((req, res) => {
+      const {name} = req.body
+      const hero = {id: HEROES[HEROES.length - 1].id + 1, name}
+      HEROES.push(hero)
+      res.json(hero)
+    })
+    .delete((req, res) => {
+      const {id} = req.params
+      const hero = HEROES.find(hero => hero.id === +id)
+      HEROES.splice(HEROES.indexOf(hero), 1)
+      res.end()
+    })
 
 http.createServer(app).listen(3000)
