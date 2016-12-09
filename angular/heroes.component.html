@@ -1,4 +1,8 @@
 <h2>My Heroes</h2>
+<div class="heroes">
+    <input type="text" #newHeroName />
+    <button (click)="addHero(newHeroName.value); newHeroName.value=''">Add</button>
+</div>
 <ul class="heroes">
     <li
             [class.selected]="hero === selectedHero"

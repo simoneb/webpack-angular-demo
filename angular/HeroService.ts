@@ -30,7 +30,12 @@ export class HeroService {
 
   update(hero:Hero): Promise<any> {
     return this.http.put("/api/heroes/", hero)
-               .toPromise()
-               
+        .toPromise()
+  }
+
+  saveHero(heroName: string) {
+    return this.http.post('/api/heroes', {name: heroName})
+        .toPromise()
+        .then(res => res.json())
   }
 }
