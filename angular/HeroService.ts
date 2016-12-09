@@ -20,4 +20,10 @@ export class HeroService {
     return this.getHeroes()
         .then(heroes => heroes.find(hero => hero.id === id))
   }
+
+  update(hero:Hero): Promise<any> {
+    return this.http.put("/api/heroes/", hero)
+               .toPromise()
+               
+  }
 }
