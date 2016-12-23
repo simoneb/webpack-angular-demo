@@ -6,6 +6,7 @@
   "scripts": {
     "webpack": "webpack-dev-server --port 4000",
     "build": "webpack",
+    "postinstall": "npm run build",
     "server": "nodemon server.js",
     "start": "node server.js",
     "test": "karma start"
