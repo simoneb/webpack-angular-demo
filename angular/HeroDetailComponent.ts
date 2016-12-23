@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { Location } from '@angular/common'
-import { HeroService } from './HeroService'
-import { Hero } from './Hero'
+import {Component, Input, OnInit} from '@angular/core'
+import {ActivatedRoute, Router} from '@angular/router'
+import {Location} from '@angular/common'
+import {HeroService} from './HeroService'
+import {Hero} from './Hero'
 
 @Component({
   selector: 'my-hero-detail',
@@ -13,15 +13,15 @@ export class HeroDetailComponent implements OnInit {
   hero: Hero
 
   constructor(private route: ActivatedRoute,
-    private heroService: HeroService,
-    private location: Location,
-    private router: Router) {
+              private heroService: HeroService,
+              private location: Location,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.route.params
-      .subscribe(({id}) => this.heroService.getById(+id)
-        .then(hero => this.hero = hero))
+        .switchMap(({id}) => this.heroService.getById(+id))
+        .subscribe(hero => this.hero = hero)
   }
 
   goBack() {
@@ -30,10 +30,9 @@ export class HeroDetailComponent implements OnInit {
 
   save() {
     this.heroService
-      .update(this.hero)
-      .then(res => {
-        console.log("then up")
-        this.router.navigate(['/dashboard'])
-      })
+        .update(this.hero)
+        .then(() => {
+          this.router.navigate(['/dashboard'])
+        })
   }
 }

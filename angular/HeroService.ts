@@ -22,10 +22,9 @@ export class HeroService {
 
   }
 
-  getById(id: number): Promise<Hero> {
+  getById(id: number): Observable<Hero> {
     return this.getHeroes()
-        .toPromise()
-        .then(heroes => heroes.find(hero => hero.id === id))
+        .map(heroes => heroes.find(hero => hero.id === id))
   }
 
   update(hero:Hero): Promise<any> {
