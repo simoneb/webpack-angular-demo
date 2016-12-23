@@ -3,7 +3,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic'
 import {AppModule} from './AppModule'
 
 const base = document.createElement('base')
-base.href = '/angular-bundle/'
+base.href = '/'
 document.head.appendChild(base)
 
 const myApp = document.createElement('my-app')

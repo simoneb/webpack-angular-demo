@@ -19,6 +19,8 @@ const HEROES = [
 
 app.use(bodyParser.json())
 
+app.use(express.static('bundles'));
+
 app.route('/api/heroes/:id?')
     .get((req, res) => {
       const {name} = req.query
@@ -52,4 +54,8 @@ app.route('/api/heroes/:id?')
       res.end()
     })
 
-http.createServer(app).listen(3000)
+app.get('/*', (req, res) =>
+    res.sendFile(__dirname + '/index.html'))
+
+http.createServer(app)
+    .listen(process.env.PORT || 3000)
